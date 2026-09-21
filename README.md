@@ -58,7 +58,7 @@ FROM employees
 GROUP BY Department
 ORDER BY attrition_rate DESC;
 ```
-![Attrition Rate by Department](screenshots/attrition_rate.png)
+![Attrition Rate by Department](screenshots/Q6.png)
 
 ### 2. Actual Headcount vs Target, With Budget per Employee
 *Business question: which departments are over or under their staffing target,
@@ -73,7 +73,7 @@ FROM employees e
 JOIN department_budget d ON e.Department = d.Department
 GROUP BY e.Department, d.HeadCountTarget, d.AnnualBudget;
 ```
-![Headcount vs Budget](screenshots/headcount_budget.png)
+![Headcount vs Budget](screenshots/Q13.png)
 
 ### 3. Manager Span of Control (Self Join)
 *Business question: how many direct reports does each manager have, and are any
@@ -86,7 +86,7 @@ JOIN employees emp ON emp.ManagerID = mgr.EmployeeNumber
 GROUP BY mgr.EmployeeNumber, mgr.JobRole
 ORDER BY direct_reports DESC;
 ```
-![Manager Direct Reports](screenshots/manager_reports.png)
+![Manager Direct Reports](screenshots/Q15.png)
 
 ### 4. Salary Band Segmentation (CTE)
 *Business question: how is the workforce distributed across Low, Medium, and
@@ -105,7 +105,7 @@ SELECT income_band, COUNT(*) AS total_employees
 FROM salary_band
 GROUP BY income_band;
 ```
-![Salary Bands](screenshots/salary_bands_cte.png)
+![Salary Bands](screenshots/Q20.png)
 
 ### 5. Top 3 Highest-Paid Employees per Job Role (Window Function)
 *Business question: who are the top earners within each role — useful for
@@ -118,7 +118,7 @@ SELECT * FROM (
 ) ranked
 WHERE rn <= 3;
 ```
-![Top Earners by Role](screenshots/top_earners_rank.png)
+![Top Earners by Role](screenshots/Q22.png)
 
 ### 6. Salary Gap vs Department Average (Window Function)
 *Business question: which individual employees are paid significantly above or
@@ -129,7 +129,7 @@ SELECT EmployeeNumber, Department, MonthlyIncome,
        ROUND(MonthlyIncome - AVG(MonthlyIncome) OVER (PARTITION BY Department), 2) AS diff_from_avg
 FROM employees;
 ```
-![Salary vs Department Average](screenshots/salary_vs_dept_avg.png)
+![Salary vs Department Average](screenshots/Q24.png)
 
 ### 7. Reusable View — Employees Who Left
 *Business question: HR frequently needs a quick list of employees who left — a
@@ -142,7 +142,7 @@ WHERE Attrition = 'Yes';
 
 SELECT * FROM high_attrition_employees;
 ```
-![High Attrition Employees View](screenshots/high_attrition_view.png)
+![High Attrition Employees View](screenshots/Q26.png)
 
 ### 8. Stored Procedure — Department Attrition Lookup
 *Business question: HR wants a reusable tool where they can type any department
@@ -163,7 +163,7 @@ DELIMITER ;
 
 CALL GetDepartmentAttrition('Sales');
 ```
-![Stored Procedure Output](screenshots/procedure_output.png)
+![Stored Procedure Output](screenshots/Q28.png)
 
 ---
 
