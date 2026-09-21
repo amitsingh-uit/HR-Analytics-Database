@@ -105,7 +105,7 @@ SELECT income_band, COUNT(*) AS total_employees
 FROM salary_band
 GROUP BY income_band;
 ```
-![Salary Bands](screenshots/Q20.png)
+![Salary Bands](screenshots/Q18.png)
 
 ### 5. Top 3 Highest-Paid Employees per Job Role (Window Function)
 *Business question: who are the top earners within each role — useful for
